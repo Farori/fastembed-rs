@@ -111,7 +111,7 @@ impl Default for InitOptions {
             max_length: DEFAULT_MAX_LENGTH,
             cache_dir: Path::new(DEFAULT_CACHE_DIR).to_path_buf(),
             show_download_progress: true,
-            threads: available_parallelism()?.get() as i16;
+            threads: available_parallelism()?.get() as i16,
         }
     }
 }
@@ -184,7 +184,7 @@ impl TextEmbedding {
             max_length,
             cache_dir,
             show_download_progress,
-            threadsб
+            threads
         } = options;
 
         let model_repo = TextEmbedding::retrieve_model(
