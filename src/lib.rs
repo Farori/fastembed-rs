@@ -100,6 +100,7 @@ pub struct InitOptions {
     pub max_length: usize,
     pub cache_dir: PathBuf,
     pub show_download_progress: bool,
+    pub threads: i16,
 }
 
 impl Default for InitOptions {
@@ -110,6 +111,7 @@ impl Default for InitOptions {
             max_length: DEFAULT_MAX_LENGTH,
             cache_dir: Path::new(DEFAULT_CACHE_DIR).to_path_buf(),
             show_download_progress: true,
+            threads: available_parallelism()?.get() as i16;
         }
     }
 }
@@ -182,9 +184,8 @@ impl TextEmbedding {
             max_length,
             cache_dir,
             show_download_progress,
+            threadsб
         } = options;
-
-        let threads = available_parallelism()?.get() as i16;
 
         let model_repo = TextEmbedding::retrieve_model(
             model_name.clone(),
